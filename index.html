@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <style>
+        .img1{
+            width: 100px;
+            height: auto;
+        }
+        menu{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f9fa;
+            padding: 13px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        menu a{
+            display: block;
+            text-decoration: none;
+            line-height: 2.4375rem;
+            padding: 0 2.321rem;
+            border-top: 3px solid transparent;
+            border-bottom: 3px solid transparent;
+            color: #a6a6a8;
+            font-weight: 500;
+            transition: border-color .2s, background .2s, color .2s;
+            transition-timing-function: cubic-bezier(.215,.61,.355,1);
+            position: relative;
+        }
+        menu a:hover{
+            color: #949494;
+            background-color: rgba(0,0,0,.05);
+            border-bottom: 3px solid #fffb00;
+        }
+        menu ul{
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        menu ul li{
+            margin-right: 15px;
+        }
+        menu ul li a{
+            color: #a6a6a8;
+            text-decoration: none;
+        }
+        menu ul li a .img1{
+            width: 100px;
+            height: auto;
+        }
+        menu ul li a:hover{
+            color: #949494;
+        }
+        .text header{
+            background-color: #09539c;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .text p{
+            color:#949495;
+            padding: 20px;
+        }
+        .btn{
+            padding: 5px 10px;
+            font-size: 18px;
+            background-color: white;
+            color: black;
+            border: 2px solid green;
+            border-radius: 5px;
+            cursor: pointer;
+            outline: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn:active{
+            transform: scale(0.95);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .btn:hover{
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <menu>
+        <ul>
+        <li><img src="https://fecdn.luogu.com.cn/luogu/logo.png?0fdd294ff62e331d2f70e1a37ba4ee02" class="img1" alt="Logo"></li>
+        <li><a href="index.html">主页</a></li>
+        <li><a href="https://www.luogu.com.cn/team/88023">团队</a></li>
+        <li><a href="list.html">题目列表</a></li>
+        <li><a href="https://netcut.cn/FMOi">聊天室</a></li>
+        </ul>
+        <ul>
+           <li><input type="text" placeholder="输入题号跳转" style="padding: 5px 10px; border-radius: 5px; border: 1px solid #ccc;" id="search"></input></li>
+           <li><button onclick="search()">跳转</button></li>
+           <script>
+               function search(){
+                     let search = document.getElementById("search").value;
+                     window.location.href = "https://www.luogu.com.cn/problem/"+search;
+               }
+              </script>
+            </ul>
+    </menu>
+    <div id="text">
+        <header>
+            <h1>Welcome to the team side!</h1>
+        </header>
+        <p id="hef"><h2>FMOI</h2></p>
+        <div id="csgo"> 这是什么？</div>
+        <p><input type="text" id="input1" placeholder="随便输入点"></input></p>
+        <a href="https://www.luogu.com.cn/paste/06cl5wzv"><p><button class="btn" onclick="cffnoi()">快按这里</button></p></a>
+        
+        <script>
+            function ccfnoi(){
+                let v=document.getElementById("input1").value;
+                let h=document.getElementById("csgo");
+                h.innerText = v;
+                console.log(v);
+            }
+        </script>
+        </div>
+        <h1 class="color-text">
+            <span style="color: blue;">洛</span>
+            <span style="color: purple;">谷</span>
+            <span style="color: cornflowerblue;">将</span>
+            <span style="color: cadetblue;">会</span>
+            <span style="color: green;">五</span>
+            <span style="color: orange;">彩</span>
+            <span style="color: salmon;">斑</span>
+            <span style="color: red;">澜</span>
+        </h1>
+    
+        <p><a href="https://www.arealme.com/click-speed-test/zh/">点击测试</a></p>
+        <div class="box">
+            <img src="https://upload-bbs.mihoyo.com/upload/2022/04/05/49837885/e12b45cb79b5f9ab7654c643c63d149d_4881849427955308109.gif?x-oss-process=image//auto-orient,0/interlace,1/format,gif" alt="图片2">
+        </div>
+        <div class="box">
+            <img src="https://cdn.luogu.com.cn/upload/image_hosting/964tmedd.png" alt="图片4">
+        </div>
+    
+        <h2>
+            <span style="font-size: 24px; color: red;">众所</span>
+            <span style="font-size: 36px; color: blue;">周知</span>
+            <span style="font-size: 48px; color: orange;">一个</span>
+            <span style="font-size: 36px; color: yellow;">蒟蒻</span>
+            <span style="font-size: 24px; color: salmon;">需要</span>
+            <span style="font-size: 72px; color: green;">亿</span>
+            <span style="font-size: 36px; color: pink;">张</span>
+            <span style="font-size: 36px; color: cadetblue;">头图</span>
+        </h2>
+    
+        <div class="box">
+            <img src="https://cdn.luogu.com.cn/upload/pic/70580.png" alt="图片5">
+        </div>
+    
+        </div>
+</body>
+</html>
