@@ -54,6 +54,11 @@
             color: #4CAF50;
         }
 
+        .chat-messages .message .timestamp {
+            font-size: 12px;
+            color: #777;
+        }
+
         .chat-messages .message .text {
             margin-top: 5px;
         }
@@ -112,6 +117,32 @@
         .username-container button:hover {
             background: #45a049;
         }
+
+        .clear-chat {
+            padding: 10px;
+            background: #f9f9f9;
+            text-align: center;
+        }
+
+        .clear-chat input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .clear-chat button {
+            padding: 10px 15px;
+            background: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .clear-chat button:hover {
+            background: #e60000;
+        }
     </style>
 </head>
 <body>
@@ -135,27 +166,53 @@
             <input type="text" id="chat-input" placeholder="Type a message..." disabled>
             <button onclick="sendMessage()" disabled>Send</button>
         </div>
+
+        <!-- 清空聊天记录 -->
+        <div class="clear-chat">
+            <input type="password" id="clear-password" placeholder="Enter password to clear chat...">
+            <button onclick="clearChat()">Clear Chat</button>
+        </div>
     </div>
 
     <script>
+        // WebSocket 连接
+        const socket = new WebSocket('ws://localhost:8080');
+
         // 获取 DOM 元素
         const chatMessages = document.getElementById('chat-messages');
         const chatInput = document.getElementById('chat-input');
         const sendButton = document.querySelector('.chat-input button');
         const usernameInput = document.getElementById('username-input');
         const usernameContainer = document.getElementById('username-container');
+        const clearPasswordInput = document.getElementById('clear-password');
 
         let username = localStorage.getItem('chatUsername') || '';
 
+        // WebSocket 消息处理
+        socket.addEventListener('message', (event) => {
+            const message = JSON.parse(event.data);
+            appendMessage(message);
+        });
+
         // 加载聊天记录
         function loadChat() {
-            const messages = JSON.parse(localStorage.getItem('chatMessages')) || [];
-            chatMessages.innerHTML = messages.map(msg => `
-                <div class="message">
-                    <div class="username">${msg.username}:</div>
-                    <div class="text">${msg.text}</div>
-                </div>
-            `).join('');
+            fetch('/getMessages') // 从服务器获取聊天记录
+                .then(response => response.json())
+                .then(messages => {
+                    messages.forEach(appendMessage);
+                });
+        }
+
+        // 添加消息到聊天记录
+        function appendMessage(message) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.innerHTML = `
+                <div class="username">${message.username}:</div>
+                <div class="timestamp">${new Date(message.timestamp).toLocaleTimeString()}</div>
+                <div class="text">${message.text}</div>
+            `;
+            chatMessages.appendChild(messageElement);
             chatMessages.scrollTop = chatMessages.scrollHeight; // 滚动到底部
         }
 
@@ -175,11 +232,27 @@
         function sendMessage() {
             const messageText = chatInput.value.trim();
             if (messageText) {
-                const messages = JSON.parse(localStorage.getItem('chatMessages')) || [];
-                messages.push({ username, text: messageText });
-                localStorage.setItem('chatMessages', JSON.stringify(messages));
+                const message = {
+                    username,
+                    text: messageText,
+                    timestamp: Date.now()
+                };
+                socket.send(JSON.stringify(message)); // 通过 WebSocket 发送消息
                 chatInput.value = ''; // 清空输入框
-                loadChat(); // 重新加载聊天记录
+            }
+        }
+
+        // 清空聊天记录
+        function clearChat() {
+            const password = clearPasswordInput.value.trim();
+            if (password === 'admin123') { // 假设密码是 admin123
+                fetch('/clearMessages', { method: 'POST' }) // 请求服务器清空聊天记录
+                    .then(() => {
+                        chatMessages.innerHTML = ''; // 清空本地聊天记录
+                        clearPasswordInput.value = ''; // 清空密码输入框
+                    });
+            } else {
+                alert('Incorrect password!');
             }
         }
 
