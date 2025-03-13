@@ -1,159 +1,207 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
     <style>
-        .img1{
-            width: 100px;
-            height: auto;
-        }
-        menu{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #f8f9fa;
-            padding: 13px 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        menu a{
-            display: block;
-            text-decoration: none;
-            line-height: 2.4375rem;
-            padding: 0 2.321rem;
-            border-top: 3px solid transparent;
-            border-bottom: 3px solid transparent;
-            color: #a6a6a8;
-            font-weight: 500;
-            transition: border-color .2s, background .2s, color .2s;
-            transition-timing-function: cubic-bezier(.215,.61,.355,1);
-            position: relative;
-        }
-        menu a:hover{
-            color: #949494;
-            background-color: rgba(0,0,0,.05);
-            border-bottom: 3px solid #fffb00;
-        }
-        menu ul{
-            display: flex;
-            list-style: none;
-            padding: 0;
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
             margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
-        menu ul li{
-            margin-right: 15px;
+
+        .chat-container {
+            width: 400px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
-        menu ul li a{
-            color: #a6a6a8;
-            text-decoration: none;
-        }
-        menu ul li a .img1{
-            width: 100px;
-            height: auto;
-        }
-        menu ul li a:hover{
-            color: #949494;
-        }
-        .text header{
-            background-color: #09539c;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .text p{
-            color:#949495;
-            padding: 20px;
-        }
-        .btn{
-            padding: 5px 10px;
+
+        .chat-header {
+            background: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
             font-size: 18px;
-            background-color: white;
-            color: black;
-            border: 2px solid green;
+            font-weight: bold;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .chat-messages .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            background: #f1f1f1;
+        }
+
+        .chat-messages .message .username {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .chat-messages .message .text {
+            margin-top: 5px;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            background: #f9f9f9;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .chat-input button {
+            padding: 10px 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
-            outline: none;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-        .btn:active{
-            transform: scale(0.95);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+
+        .chat-input button:hover {
+            background: #45a049;
         }
-        .btn:hover{
-            background-color: #45a049;
+
+        .username-container {
+            padding: 15px;
+            background: #f9f9f9;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .username-container input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .username-container button {
+            width: 100%;
+            padding: 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .username-container button:hover {
+            background: #45a049;
         }
     </style>
 </head>
 <body>
-    <menu>
-        <ul>
-        <li><img src="https://fecdn.luogu.com.cn/luogu/logo.png?0fdd294ff62e331d2f70e1a37ba4ee02" class="img1" alt="Logo"></li>
-        <li><a href="index.html">主页</a></li>
-        <li><a href="https://www.luogu.com.cn/team/88023">团队</a></li>
-        <li><a href="list.html">题目列表</a></li>
-        <li><a href="https://netcut.cn/FMOi">聊天室</a></li>
-        </ul>
-        <ul>
-           <li><input type="text" placeholder="输入题号跳转" style="padding: 5px 10px; border-radius: 5px; border: 1px solid #ccc;" id="search"></input></li>
-           <li><button onclick="search()">跳转</button></li>
-           <script>
-               function search(){
-                     let search = document.getElementById("search").value;
-                     window.location.href = "https://www.luogu.com.cn/problem/"+search;
-               }
-              </script>
-            </ul>
-    </menu>
-    <div id="text">
-        <header>
-            <h1>Welcome to the team side!</h1>
-        </header>
-        <p id="hef"><h2>FMOI</h2></p>
-        <div id="csgo"> 这是什么？</div>
-        <p><input type="text" id="input1" placeholder="随便输入点"></input></p>
-        <a href="https://www.luogu.com.cn/paste/06cl5wzv"><p><button class="btn" onclick="cffnoi()">快按这里</button></p></a>
-        
-        <script>
-            function ccfnoi(){
-                let v=document.getElementById("input1").value;
-                let h=document.getElementById("csgo");
-                h.innerText = v;
-                console.log(v);
+    <div class="chat-container">
+        <!-- 聊天室标题 -->
+        <div class="chat-header">Chat Room</div>
+
+        <!-- 用户名输入 -->
+        <div class="username-container" id="username-container">
+            <input type="text" id="username-input" placeholder="Enter your username...">
+            <button onclick="setUsername()">Save Username</button>
+        </div>
+
+        <!-- 聊天记录 -->
+        <div class="chat-messages" id="chat-messages">
+            <!-- 聊天记录动态加载 -->
+        </div>
+
+        <!-- 输入框和发送按钮 -->
+        <div class="chat-input">
+            <input type="text" id="chat-input" placeholder="Type a message..." disabled>
+            <button onclick="sendMessage()" disabled>Send</button>
+        </div>
+    </div>
+
+    <script>
+        // 获取 DOM 元素
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const sendButton = document.querySelector('.chat-input button');
+        const usernameInput = document.getElementById('username-input');
+        const usernameContainer = document.getElementById('username-container');
+
+        let username = localStorage.getItem('chatUsername') || '';
+
+        // 加载聊天记录
+        function loadChat() {
+            const messages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+            chatMessages.innerHTML = messages.map(msg => `
+                <div class="message">
+                    <div class="username">${msg.username}:</div>
+                    <div class="text">${msg.text}</div>
+                </div>
+            `).join('');
+            chatMessages.scrollTop = chatMessages.scrollHeight; // 滚动到底部
+        }
+
+        // 设置用户名
+        function setUsername() {
+            const newUsername = usernameInput.value.trim();
+            if (newUsername) {
+                username = newUsername;
+                localStorage.setItem('chatUsername', username);
+                usernameContainer.style.display = 'none'; // 隐藏用户名输入框
+                chatInput.disabled = false; // 启用输入框
+                sendButton.disabled = false; // 启用发送按钮
             }
-        </script>
-        </div>
-        <h1 class="color-text">
-            <span style="color: blue;">洛</span>
-            <span style="color: purple;">谷</span>
-            <span style="color: cornflowerblue;">将</span>
-            <span style="color: cadetblue;">会</span>
-            <span style="color: green;">五</span>
-            <span style="color: orange;">彩</span>
-            <span style="color: salmon;">斑</span>
-            <span style="color: red;">澜</span>
-        </h1>
-    
-        <p><a href="https://www.arealme.com/click-speed-test/zh/">点击测试</a></p>
-        <div class="box">
-            <img src="https://upload-bbs.mihoyo.com/upload/2022/04/05/49837885/e12b45cb79b5f9ab7654c643c63d149d_4881849427955308109.gif?x-oss-process=image//auto-orient,0/interlace,1/format,gif" alt="图片2">
-        </div>
-        <div class="box">
-            <img src="https://cdn.luogu.com.cn/upload/image_hosting/964tmedd.png" alt="图片4">
-        </div>
-    
-        <h2>
-            <span style="font-size: 24px; color: red;">众所</span>
-            <span style="font-size: 36px; color: blue;">周知</span>
-            <span style="font-size: 48px; color: orange;">一个</span>
-            <span style="font-size: 36px; color: yellow;">蒟蒻</span>
-            <span style="font-size: 24px; color: salmon;">需要</span>
-            <span style="font-size: 72px; color: green;">亿</span>
-            <span style="font-size: 36px; color: pink;">张</span>
-            <span style="font-size: 36px; color: cadetblue;">头图</span>
-        </h2>
-    
-        <div class="box">
-            <img src="https://cdn.luogu.com.cn/upload/pic/70580.png" alt="图片5">
-        </div>
-    
-        </div>
+        }
+
+        // 发送消息
+        function sendMessage() {
+            const messageText = chatInput.value.trim();
+            if (messageText) {
+                const messages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+                messages.push({ username, text: messageText });
+                localStorage.setItem('chatMessages', JSON.stringify(messages));
+                chatInput.value = ''; // 清空输入框
+                loadChat(); // 重新加载聊天记录
+            }
+        }
+
+        // 初始化
+        function init() {
+            if (username) {
+                usernameContainer.style.display = 'none'; // 如果用户名已存在，隐藏输入框
+                chatInput.disabled = false; // 启用输入框
+                sendButton.disabled = false; // 启用发送按钮
+            }
+            loadChat(); // 加载聊天记录
+        }
+
+        // 监听回车键发送消息
+        chatInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // 初始化加载
+        init();
+    </script>
 </body>
 </html>
