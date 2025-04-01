@@ -1,3 +1,6 @@
+
+# 氦luogu
+将以下脚本复制入一个[tampermonkey](https://www.tampermonkey.net/scripts.php)新脚本中即可使用。
 ```js
 // ==UserScript==
 // @name         NU
@@ -6,7 +9,6 @@
 // @description  try to take over the world!
 // @author       You
 // @match        *://www.luogu.com.cn/*
-// @icon         https://bkimg.cdn.bcebos.com/pic/b7fd5266d0160924ab18f25fb44d22fae6cd7b899e17
 // @grant        none
 // ==/UserScript==
 
@@ -734,7 +736,7 @@
     {
         let usrnv=document.querySelector(".user-nav");
         let button = document.createElement('button');
-        button.textContent="钠luogu";
+        button.textContent="氦luogu";
         button.className="Nasetb";
         usrnv.appendChild(button);
         const settingsPageContent = `
